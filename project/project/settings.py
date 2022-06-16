@@ -30,7 +30,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY',default='1234')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (env('DEBUG', default="False")== 'True')
+# DEBUG = (env('DEBUG', default="False")== 'True')
+DEBUG = 'True'
 
 ALLOWED_HOSTS = ['taskmanagerv13294.herokuapp.com', 'localhost']
 
