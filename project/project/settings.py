@@ -10,9 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from difflib import IS_CHARACTER_JUNK
 from pathlib import Path
 import environ
 import os
+import dj_database_url
 
 env = environ.Env()
 environ.Env.read_env()
@@ -25,12 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1(6bl+#hat+-0#cm18kpou!k$%z@k!a#pj*o*!5x^wt3)-w^m4'
+SECRET_KEY = env('SECRET_KEY',default='1234')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (env('DEBUG', default="False")== 'True')
 
-ALLOWED_HOSTS = ['https://taskmanagerv13294.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['taskmanagerv13294.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -112,6 +114,11 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+IS_HEROKU = (env('IS_HEROKU', default=False) == 'True')
+if (IS_HEROKU == True):
+    DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
+    ALLOWED_HOSTS = ['taskmanagerv13294.herokuapp.com']
 
 
 # Password validation
