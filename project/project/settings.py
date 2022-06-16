@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'frontend'
 ]
 
-GOOGLE_RECAPTCHA_SECRET = env('GOOGLE_RECAPTCHA_SECRET')
+GOOGLE_RECAPTCHA_SECRET = env('GOOGLE_RECAPTCHA_SECRET', default='')
+
 
 AUTH_USER_MODEL = 'users.CustomUser' # telling to django that we are using a custome user model instead of default user model
 EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
