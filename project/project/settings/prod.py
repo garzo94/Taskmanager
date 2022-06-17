@@ -1,15 +1,12 @@
 from .base import *
 import django_on_heroku
-import environ
-import os
-import dj_database_url
+from decouple import config
 
-env = environ.Env()
-environ.Env.read_env()
+
 
 from .base import *
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
 ALLOWED_HOSTS = ['taskmanagerv13294.herokuapp.com']

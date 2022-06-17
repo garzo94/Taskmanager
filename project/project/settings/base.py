@@ -13,13 +13,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from difflib import IS_CHARACTER_JUNK
 from email.policy import default
 from pathlib import Path
-import django_on_heroku
-import environ
-import os
+from dotenv import load_dotenv, find_dotenv
 import dj_database_url
+from decouple import config
 
-env = environ.Env()
-environ.Env.read_env()
 
 
 
@@ -57,15 +54,15 @@ INSTALLED_APPS = [
     'frontend'
 ]
 
-GOOGLE_RECAPTCHA_SECRET = env('GOOGLE_RECAPTCHA_SECRET', default='')
+GOOGLE_RECAPTCHA_SECRET = config('GOOGLE_RECAPTCHA_SECRET', default='')
 
 
 AUTH_USER_MODEL = 'users.CustomUser' # telling to django that we are using a custome user model instead of default user model
 EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL',default='you@localhost')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL',default='you@localhost')
 
 ANYMAIL = {
-    'MAILGUN_API_KEY': env('MAILGUN_API_KEY', default='')
+    'MAILGUN_API_KEY': config('MAILGUN_API_KEY', default='')
 }
 
 DJOSER ={
@@ -107,6 +104,7 @@ TEMPLATES = [
         },
     },
 ]
+load_dotenv(find_dotenv())
 DATABASES = {'default': dj_database_url.config(default='sqlite:///db.sqlite3',conn_max_age=600, ssl_require=False)}
 WSGI_APPLICATION = 'project.wsgi.application'
 
