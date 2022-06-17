@@ -9,7 +9,7 @@ from .base import *
 SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
-ALLOWED_HOSTS = ['taskmanagerv13294.herokuapp.com']
+ALLOWED_HOSTS = ['alextax.herokuapp.com']
 
 DEBUG_PROPAGATE_EXCEPTIONS = True
 LOGGING = {
