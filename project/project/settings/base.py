@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from difflib import IS_CHARACTER_JUNK
+from email.policy import default
 from pathlib import Path
+import django_on_heroku
 import environ
 import os
 import dj_database_url
@@ -19,21 +21,23 @@ import dj_database_url
 env = environ.Env()
 environ.Env.read_env()
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY',default='1234')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = (env('DEBUG', default="False")== 'True')
-DEBUG = 'True'
 
-ALLOWED_HOSTS = ['taskmanagerv13294.herokuapp.com', 'localhost']
+
+
 
 
 # Application definition
@@ -104,22 +108,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'project.wsgi.application'
-ALLOWED_HOSTS = ['taskmanagerv13294.herokuapp.com','localhost','127.0.0.1']
+
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = {'default': dj_database_url.config(default='sqlite:///db.sqlite3',conn_max_age=600, ssl_require=False)}
 
-IS_HEROKU = (env('IS_HEROKU', default=False) == 'True')
 
-if (IS_HEROKU == True):
-    DATABASES['default'] = dj_database_url.config()
+
+
+
     
 
 
@@ -158,7 +157,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR/ 'staticfiles'
 
 
 # Default primary key field type

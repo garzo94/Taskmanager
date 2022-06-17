@@ -31,7 +31,7 @@ export default function SignUp() {
   const navigate = useNavigate()
   
   const handleSubmit = (values) => {
-    console.log(values)
+    
     register(values, () =>{
       navigate('/auth/signin')
       
