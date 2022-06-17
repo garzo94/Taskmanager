@@ -119,7 +119,7 @@ DATABASES = {
 IS_HEROKU = (env('IS_HEROKU', default=False) == 'True')
 
 if (IS_HEROKU == True):
-    DATABASES['default'] = dj_database_url.parse(env('DATABASE_URL'))
+    DATABASES['default'] = dj_database_url.config()
     
 
 
@@ -158,7 +158,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'frontend/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Default primary key field type
