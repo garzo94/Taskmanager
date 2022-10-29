@@ -16,6 +16,7 @@ export default function AuthContextProvider({children}) {
 
     const loadAuthUser = ()=>{
         const authToken = localStorage.getItem('authToken');
+
         if(!authToken){
             setIsAuthenticated(false);
             return;
@@ -32,7 +33,7 @@ export default function AuthContextProvider({children}) {
 
     
     }
-        
+        //I would change this
     const providerValue = useMemo(()=>{
             return {
                 isAuthenticated,
@@ -42,13 +43,16 @@ export default function AuthContextProvider({children}) {
             }
         }, [isAuthenticated,setIsAuthenticated, user, setUser])
 
+
+
+    //I would change this code
     useEffect(()=>{
             if (!user && (isAuthenticated === null || isAuthenticated === true)){
                 loadAuthUser()
             }
         }, [user, isAuthenticated])
       
-        console.log(providerValue)
+        
 
         return(
             <AuthContext.Provider value={providerValue}>

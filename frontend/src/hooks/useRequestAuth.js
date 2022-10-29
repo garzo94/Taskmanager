@@ -4,9 +4,9 @@ import { useSnackbar } from 'notistack'
 import formatHttpApiError from '../helpers/formatHttpApiError'
 import { AuthContext } from '../contexts/AuthContextProvider'
 import getCommonOptions from '../helpers/axios/getnCommonOptions'
-import { DataObject } from '@mui/icons-material'
 
 
+// alex45 Danjango2022
 export default function useRequestAuth() {
     const [loading, setLoading] = useState(false);
     const [logoutPending, setLogoutPending] = useState(false)
@@ -28,7 +28,7 @@ export default function useRequestAuth() {
             setLoading(false)
             enqueueSnackbar("Reset password link will be sent to the provide email")
             
-          }). catch(handleRequestError)
+          }).catch(handleRequestError)
     },[enqueueSnackbar, handleRequestError]) 
 
     const resetPassword = useCallback((data, succesCallback)=>{
@@ -57,6 +57,7 @@ export default function useRequestAuth() {
 
     const login = useCallback(({username, password}, successCallback)=>{
         setLoading(true);
+        console.log(username, password)
         axios.post("/api/auth/token/login/",{username, password})
           .then((res)=>{
             const {auth_token} = res.data;

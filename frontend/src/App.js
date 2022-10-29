@@ -40,6 +40,7 @@ export default function App() {
               }}>
                 <Routes>
                   <Route element={<RequireAuth/>}>
+
                     <Route element={<BaseLayout/>}>
                       <Route path="/categories"
                       element = { <Categories />} />
@@ -55,12 +56,10 @@ export default function App() {
                       element = {  <TaskDetails /> }/>
                       <Route path={'/'}
                       element = {  <Dashboard /> }/>
-
                     </Route>
                     
 
                   </Route>
-
                   <Route element={<RequireNoteAuth/>}>
                     <Route path='/auth/signup' 
                     element={<SignUp/>}/>
@@ -70,7 +69,6 @@ export default function App() {
                     element={<RequestResetPassword/>}/>
                     <Route path='/auth/password-reset/confirm/:uid/:token' 
                     element={<ResetPasswordConfirm/>}/>
-
                   </Route>
                   
                   

@@ -153,11 +153,11 @@ export default function Tasks() {
       <Box sx={{ 
         display:"flex", justifyContent:"flex-end"
       }}>
-        <Pagination
+        {/* <Pagination
           color="primary"
           count={Math.ceil(resourceList.count / pageSize)}
           page={query.page ? parseInt(query.page) : 1}
-          onChange={handleChangePagination}/>
+          onChange={handleChangePagination}/> */}
       </Box>
     </div>
   )

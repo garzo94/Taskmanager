@@ -11,14 +11,13 @@ export default function useRequestResource({ endpoint, resourceLabel }){
     const [resourceList, setresourceList] = useState({
         results: []
     });
-
     const [resource, setresource] = useState({name:"", color:""})
 
     // Overlay ###########
     const loadingOverlay = useContext(LoadingOverlayResourceContext);
     const { setLoading } = loadingOverlay
 
-    
+
 // errors #########################
     const {  enqueueSnackbar } = useSnackbar()
     const [error, seterror] = useState(null)
@@ -33,10 +32,10 @@ export default function useRequestResource({ endpoint, resourceLabel }){
     // ################################
 
     const getResourceList = useCallback(({query=""} = {}) => {
-            
+
             setLoading(true)
          axios.get(`/api/${endpoint}/${query}`, getCommonOptions())
-         
+
            .then((res) => {
                 setLoading(false)
                 if (res.data.results){
@@ -46,11 +45,9 @@ export default function useRequestResource({ endpoint, resourceLabel }){
                         results: res.data
                     })
                 }
-                    
-               
-               
+
            }).catch(handleRequestResourceError)
-           
+
     }, [endpoint, handleRequestResourceError, setLoading])
 
     const addResource = useCallback((values, succesCallback) => {
@@ -62,7 +59,7 @@ export default function useRequestResource({ endpoint, resourceLabel }){
                 if (succesCallback){
                     succesCallback()
                 }
-                
+
             }).catch(handleRequestResourceError)
     }, [endpoint, enqueueSnackbar, resourceLabel, handleRequestResourceError, setLoading])
 
@@ -79,7 +76,7 @@ export default function useRequestResource({ endpoint, resourceLabel }){
     const updateResource = useCallback((id, values, succesCallback) => {
         setLoading(true)
         axios.patch(`/api/${endpoint}/${id}/`, values, getCommonOptions())
-         
+
             .then((res) => {
                 const updated = res.data;
                 const newResourceList = {
@@ -97,7 +94,7 @@ export default function useRequestResource({ endpoint, resourceLabel }){
                 if (succesCallback){
                     succesCallback()
                 }
-                
+
             }).catch(handleRequestResourceError)
     },[endpoint, enqueueSnackbar, resourceLabel, handleRequestResourceError, setLoading, resourceList])
 
@@ -112,15 +109,15 @@ export default function useRequestResource({ endpoint, resourceLabel }){
             const newResourceList = {
                 results: resourceList.results.filter((r) =>{
                     return r.id !== id
-                
+
                 })
-            } 
-            setresourceList(newResourceList)  
-            
-        
+            }
+            setresourceList(newResourceList)
+
+
         }).catch(handleRequestResourceError)
 
-        
+
     },[endpoint, resourceList, enqueueSnackbar], resourceLabel, handleRequestResourceError)
 
     return {

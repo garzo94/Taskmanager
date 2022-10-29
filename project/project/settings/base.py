@@ -40,6 +40,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'users',
     'tasks',
     'rest_framework.authtoken',
+    
     'djoser',
     'frontend'
 ]
@@ -67,14 +69,14 @@ ANYMAIL = {
 
 DJOSER ={
     "PASSWORD_RESET_CONFIRM_URL":"auth/password-reset/confirm/{uid}/{token}",
-    "SERIALIZERS":{
-        'password_reset': 'users.serializers.CustomSendEmailResetSerializer'
-    },
+    # "SERIALIZERS":{
+    #     'password_reset': 'users.serializers.CustomSendEmailResetSerializer'
+    # },
     "PASSWORD_RESET_CONFIRM_RETYPE": True
 }
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware'
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -112,15 +114,6 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-
-
-
-
-
-
-    
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -156,7 +149,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+import os
+STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 

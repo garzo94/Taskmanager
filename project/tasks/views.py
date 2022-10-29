@@ -11,7 +11,7 @@ from django.db.models.query_utils import Q
 class StandardResultSetPagination(PageNumberPagination):
     page_size = 6 #defaulta page_size
     page_size_query_param = 'page_size' # this is the parameter to specifize the page sieze otherwqise is 6
-    max_page_size = 6 
+    max_page_size = 6
 
 
 class CategoryMV(viewsets.ModelViewSet): # this provide crud in one url
@@ -22,7 +22,7 @@ class CategoryMV(viewsets.ModelViewSet): # this provide crud in one url
     def get_queryset(self): #return categories that belogn to the current login user
         return self.request.user.categories.all()
 
-    def perform_create(self, serializer): #when a categorie is created we are ading created_by = the current user
+    def perform_create(self, serializer): #when a categorie is created we are adding created_by = the current user
         serializer.save(created_by=self.request.user)
 
 class TasksMV(viewsets.ModelViewSet):
@@ -37,7 +37,7 @@ class TasksMV(viewsets.ModelViewSet):
 
 
     def get_queryset(self):
-        
+
         user = self.request.user
         completed = self.request.query_params.get('completed')
         priority = self.request.query_params.get('priority')
@@ -50,13 +50,13 @@ class TasksMV(viewsets.ModelViewSet):
 
         if priority is not None:
             query_params['priority'] = priority
-        
+
         if category is not None:
             query_params["category"] = category
 
 
         return Task.objects.filter(created_by=user, **query_params)
-    
+
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
 

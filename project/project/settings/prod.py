@@ -9,7 +9,7 @@ from .base import *
 SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
-ALLOWED_HOSTS = ['alextax.herokuapp.com']
+ALLOWED_HOSTS = ['djangreact-fullstack.herokuapp.com']
 
 DEBUG_PROPAGATE_EXCEPTIONS = True
 LOGGING = {

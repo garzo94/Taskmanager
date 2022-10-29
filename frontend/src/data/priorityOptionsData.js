@@ -19,8 +19,18 @@ const priorityOptionsData = {
         color: red[500],
     },
 };
+
+// Object.keys(priorityOptionsData) this is an array of 4 keys [1,2,3,4]
+
+// console.log('return from priority Data',Object.keys(priorityOptionsData).map(key => ({ key, ...priorityOptionsData[key], value: key })))
+// return an array of {
+    // "key": "2",
+    // "label": "Medium",
+    // "color": "#00bcd4",
+    // "value": "2"}
+
 export const priorityOptionsDataList = Object
     .keys(priorityOptionsData)
-    .map(key => ({ key, ...priorityOptionsData[key], value: key }));
+    .map(key => ({ key:key, ...priorityOptionsData[key], value: key }));
 
 export default priorityOptionsData;

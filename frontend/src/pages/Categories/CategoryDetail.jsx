@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
 import { Grid, TextField, Typography, Paper, Button, Box } from "@mui/material"
 import  * as yup from "yup";
 import {Link, useNavigate, useParams } from "react-router-dom"
 import useRequestResource from '../../hooks/useRequestResource';
-import { FormikContext } from 'formik/dist/formik.cjs.production.min';
+
 import ColorPicker from '../../components/ColorPicker';
 
 export default function CategoryDetail() {
@@ -15,7 +15,7 @@ export default function CategoryDetail() {
     
     
     const handleSubmit = (values) => {
-        console.log(values)
+        
         const formattedValues = {
             name: values.name,
             color: values.color.substring(1)
@@ -64,7 +64,7 @@ useEffect(() => {
     if(id){
         getResource(id)
 
-    }},[id])
+    }},[id, getResource])
 
 
 
